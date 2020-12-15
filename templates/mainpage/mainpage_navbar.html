@@ -1,0 +1,81 @@
+{% load static %}
+<div>
+    <header class="header_area">
+        <div class="main_menu">
+            <div class="search_input" id="search_input_box" style="display: none;">
+                <div class="container">
+                    <form class="d-flex justify-content-between" method="" action="">
+                        <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                        <button type="submit" class="btn"></button>
+                        <span class="ti-close" id="close_search" title="Close Search"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- 네비게이션 -->
+        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand logo_h" href="/main"><img src="{% static 'athens_logo.png' %}" alt="" width="200" height="100"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span> <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav menu_nav ml-auto">
+                <li class="nav-item active">
+                    <a href="/my" class="nav-link">학원소개</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#모집요강.html">모집요강</a>
+                </li>
+
+                <!-- 수강신청 -->
+                <li class="nav-item submenu dropdown active">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">수강신청</a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#결제.html">결제</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 커뮤니티 -->
+                <li class="nav-item submenu dropdown active">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#공지사항.html">공지사항</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#자주하는질문.html">자주하는 질문</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#문의하기html">문의하기</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#온라인자료.html">온라인자료</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 상담 -->
+                <li class="nav-item submenu dropdown active">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">상담</a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#상담예약.html">상담예약</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#상담취소.html">상담취소</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <a class="nav-link" href="/login"><button type="button" class="btn btn-success ml-3">로그인</button></a>
+            <a href="/sign"><button type="button" class="btn btn-success ml-3">회원가입</button></a>
+        </div>
+    </nav>
+</div>
+    </header>
+</div>

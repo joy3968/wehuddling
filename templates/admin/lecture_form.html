@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block title %}강의 등록{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="container pd-0">
+					<div class="page-header ml-3 mr-3">
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div class="title">
+									<h4>강의 등록</h4>
+								</div>
+								<nav aria-label="breadcrumb" role="navigation">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="index.html">강의 관리</a></li>
+										<li class="breadcrumb-item active" aria-current="page">강의 목록</li>
+									</ol>
+								</nav>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class = "row">
+						<div class="col container">
+							<div class="col card-box mb-30">
+								<div class="container pb-3">
+									<h5 class="my-3 border-bottom pt-3 pb-2">강의 등록</h5>
+									<!-- 선생님 선택을 완료하지 않았을 경우	-->
+									{% if not teacher_info %}
+									<span>* 등록하실 선생님을 고르신 후 <span class="text-danger">선생님 선택을 먼저 눌러주세요</span></span>
+									{% endif %}
+
+								<div class = "row">
+									<div class = "col">
+										<div class = "row">
+											<!-- 선생님 선택을 완료했을 경우 -> 해당 선생을 선택했다는 문구가 표시됨-->
+											{% if teacher_info %}
+															<div class="col mt-5" style="width : 500px;">
+															<span><span class="text-primary">* {{ teacher_info.t_name }}</span> 선생님 선택.</span>
+															</div>
+											{% endif %}
+											<div class = "col-6 ml-3">
+												<form method="post" enctype="multipart/form-data" class="post-form my-3">
+													{% csrf_token %}
+												<!-- 선생님을 선택했을 경우에는 display : none을 사용하여 콤보박스를 감춥니다. -->
+													<select name="t_no" class="form-control mt-5" {% if teacher_info %} style="display : none" {% endif %}>
+
+                        							{% for teacher in teacher_list %}
+													<!--재직중인 사람만 표시-->
+													{% if teacher.t_state %}
+												<!-- 선생님의 이름과 과목표시 // value값은 선생님의 pk값을 받는다.-->
+                        							<option value="{{ teacher.t_no }}" >{{ teacher.t_name }} ({{ teacher.t_subject }})</option>
+													{% endif %}
+                        							{% endfor %}
+                    								</select>
+
+													</div>
+
+													<div class= "col mt-5">
+														<button type="submit" class="btn btn-primary" name="버튼" value="1" {% if teacher_info %} style="display : none" {% endif %}>선생님 선택</button>
+														<button type="submit" class="btn btn-primary" name="버튼" value="3" {% if not teacher_info %} style="display : none" {% endif %}>다른 선생님 선택</button>
+													</div>
+												</form>
+											</div>
+
+								<!-- 선생님을 선택했을 경우 선생님 정보를 보여줍니다. -->
+									{% if teacher_info %}
+									<div class = "row">
+										<div class = "mr-5 ml-3 mt-5">
+										  <img src="/media/{{ teacher_info.t_file }}" style="width : 120px; height : 150px; border-radius: 10px;" alt="">
+										</div>
+										<div class = "col-9 mt-3">
+											<div class="container">
+												<table class="table smalling">
+													<tr>
+														<th colspan="4" style="font-size : 15px" class="text-center pr-5 text-primary">[ {{ teacher_info.t_subject }} ]</th>
+													</tr>
+													<tr>
+														<th style="font-size : 11px">이름</th>
+														<td style="font-size : 11px">{{ teacher_info.t_name }}</td>
+														<th style="font-size : 11px">휴대폰 번호</th>
+														<td style="font-size : 11px">{{ teacher_info.t_phone }}</td>
+													</tr>
+													<tr>
+														<th style="font-size : 11px">id(이메일)</th>
+												<!-- id를 뽑기 위해서 user와의 외래키를 통해 username 속성을 불러와야 옵니다.-->
+														<td style="font-size : 11px">{{ teacher_info.user.username  }}</td>
+														<th style="font-size : 11px">생년월일</th>
+														<td style="font-size : 11px">{{ teacher_info.t_birth|date:"Y년 M d일" }}</td>
+													</tr>
+													<tr class="smalling">
+														<th style="font-size : 11px">성별</th>
+														<td style="font-size : 11px">{{ teacher_info.t_gender }}</td>
+														<th style="font-size : 11px">입사일자</th>
+														<td style="font-size : 12px">{{ teacher_info.t_join|date:"Y년 M d일" }}</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									{% endif %}
+
+
+								<div class="container">
+									<form method="post" enctype="multipart/form-data" class="post-form my-3" onsubmit="return alert('새로운 강의가 등록되었습니다.')">
+										{% csrf_token %}
+										{{ form.as_p }}
+
+										<p>
+										<label>강의 이미지 파일:</label>
+											<input name="l_img" type="file">
+										</p>
+
+										<!-- 넘겨받은 선생님 정보가 있을 경우(정보만 넘기기 위한 기능이므로 숨겨놓음) -->
+										{% if teacher_info %}
+										<input name="t_no" value={{ teacher_info.t_no }} style ="display : none">
+										{% endif %}
+										<div class="row pd-5 pt-2 pull-right">
+										<button type="submit" class="btn btn-primary" name="버튼" value="2">등록하기</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- 추가해야 footer모양 나옴 (base에서 div 두개) -->
+		</div>
+	</div>
+
+<!-- datepicker 세부설정 -->
+	<script>
+	 $("#date-text").datepicker({
+
+		 changeMonth: true,
+
+		 changeYear: true,
+
+		 yearRange: 'c:c+10',
+
+		 closeText: '닫기',
+
+		 showButtonPanel: true,
+
+		 currentText: '오늘 날짜',
+
+		 dateFormat: "yy-mm-dd",
+
+		 dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+
+		 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+
+	 });
+	</script>
+	<script src="../static/vendors/scripts/core.js"></script>
+	<script src="../static/vendors/scripts/script.min.js"></script>
+	<script src="../static/vendors/scripts/process.js"></script>
+	<script src="../static/vendors/scripts/layout-settings.js"></script>
+	<script src="../static/src/plugins/apexcharts/apexcharts.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+	<script src="../static/vendors/scripts/dashboard.js"></script>
+{% endblock %}

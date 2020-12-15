@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}위잇딜라이트 - 배송인목록{% endblock %}
+{% block content %}
+
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>배송인 목록</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">배송인 관리</a></li>
+									<li class="breadcrumb-item active text-success" aria-current="page">배송인 목록</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="col-md-6 col-sm-12 text-right">
+							<div class="dropdown">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Simple Datatable start -->
+				<div class="card-box mb-30">
+					<div class="pd-20">
+						<h4 class="text-success h4">배송인 목록</h4>
+					</div>
+					<div class="pb-20">
+						<table class="data-table table stripe hover nowrap text-center">
+							<thead>
+								<tr>
+									<th class="table-plus">배송인 이름</th>
+                                    <th>휴대폰 번호</th>
+									<th>담당 구역</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% if shipper_list %}
+								{% for shipper in shipper_list %}
+
+								<tr>
+									<td class="table-plus">{{ shipper.sp_name }}</td>
+                                    <td>{{ shipper.sp_phone }}</td>
+									<td>{{ shipper.sp_city }} {{ shipper.sp_borough }}</td>
+									<td>{{ shipper.sp_join }}</td>
+								</tr>
+
+								{% endfor %}
+								{% endif %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+	<!-- js -->
+	<script src="../static/vendors/scripts/core.js"></script>
+	<script src="../static/vendors/scripts/script.min.js"></script>
+	<script src="../static/vendors/scripts/process.js"></script>
+	<script src="../static/vendors/scripts/layout-settings.js"></script>
+	<script src="../static/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+	<!-- buttons for Export datatable -->
+	<script src="../static/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/buttons.print.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/buttons.html5.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/buttons.flash.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/pdfmake.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/vfs_fonts.js"></script>
+	<!-- Datatable Setting js -->
+	<script src="../static/vendors/scripts/datatable-setting.js"></script></body>
+{% endblock %}

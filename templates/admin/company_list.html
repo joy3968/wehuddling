@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}위잇딜라이트 - 거래처 목록{% endblock %}
+{% block content %}
+
+
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<ul class="container pd-0">
+					<div class="page-header">
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div class="title">
+									<h4>거래처 목록</h4>
+								</div>
+								<nav aria-label="breadcrumb" role="navigation">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="index.html">거래처 관리</a></li>
+										<li class="breadcrumb-item active text-success" aria-current="page">거래처 목록</li>
+									</ol>
+								</nav>
+							</div>
+						</div>
+					</div>
+
+					<ul class="contact-directory-list">
+						<ul class="row">
+
+					{% if company_list %}
+					{% for company in company_list %}
+							<li class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+								<div class="contact-directory-box">
+									<div class="contact-dire-info text-center">
+										<div class="contact-avatar mt-4">
+											<span>
+												<img src="../media/{{ company.cp_img }}" style="width : 100%; height : 100%;" alt="">
+											</span>
+										</div>
+										<div class="contact-name">
+											<h4>{{ company.cp_name }}</h4>
+
+										</div>
+										<div class="contact-skill">
+
+											<span class="badge badge-pill"><i class="icon-copy fa fa-phone" aria-hidden="true">&nbsp;&nbsp; {{ company.cp_phone }}</i></span>
+
+										</div>
+									</div>
+
+								</div>
+							</li>
+            		{% endfor %}
+            		{% endif %}
+
+						</ul>
+					</ul>
+
+			</div>
+        <div class="container">
+				<!-- js -->
+
+
+
+
+	<script src="../static/plus.js"></script>
+	<script src="../static/vendors/scripts/core.js"></script>
+	<script src="../static/vendors/scripts/script.min.js"></script>
+	<script src="../static/vendors/scripts/process.js"></script>
+	<script src="../static/vendors/scripts/layout-settings.js"></script>
+	<script src="../static/src/plugins/apexcharts/apexcharts.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+	<script src="../static/vendors/scripts/dashboard.js"></script>
+			{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}위잇딜라이트 - 주문목록{% endblock %}
+{% block content %}
+
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>주문 목록</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">주문 관리</a></li>
+									<li class="breadcrumb-item active text-success" aria-current="page">주문 목록</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="col-md-6 col-sm-12 text-right">
+							<div class="dropdown">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Simple Datatable start -->
+				<div class="card-box mb-30">
+					<div class="pd-20">
+						<h4 class="text-success h4">주문 목록</h4>
+					</div>
+					<div class="pb-20">
+						<table class="data-table table stripe hover nowrap text-center">
+							<thead>
+								<tr>
+									<th class="table-plus">상품 명</th>
+                                    <th>주문 고객</th>
+									<th>주문 시간</th>
+									<th>배송지</th>
+									<th>배송 완료 여부</th>
+									<th>배송 담당자</th>
+									<th class="datatable-nosort">배송 완료 버튼</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% if order_list %}
+								{% for order in order_list %}
+
+								<tr>
+									<td class="table-plus">{{ order.gd_no.gd_name }}</td>
+                                    <td>{{ order.customer.c_name }}</td>
+									<td>{{ order.od_join }}</td>
+									<td>{{ order.od_address }}</td>
+									{% if order.od_state %}
+                                    <td class="text-success">배송 완료</td>
+                                    {% else %}
+                                    <td class="text-primary">배송중</td>
+                                    {% endif %}
+									<td>{{ order.sp_no.sp_name }}</td>
+									<td>
+										<div class="dropdown">
+											<form method="post" onsubmit="return confirm('배송 완료처리 하시겠습니까?');">
+											{% csrf_token %}
+                                        <!-- 배송을 완료하지 않은 상품에 대해선 배송 완료 버튼을 보여줍니다.-->
+                                            {% if not order.od_state %}
+											<button id="test" value="{{ order.od_no }}" name="od_no" type="submit" class="btn btn-success"><span class="font_a">배송 완료</span></button>
+                                            {% endif %}
+
+											</form>
+										</div>
+									</td>
+								</tr>
+
+								{% endfor %}
+								{% endif %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+	<!-- js -->
+	<script src="../static/vendors/scripts/core.js"></script>
+	<script src="../static/vendors/scripts/script.min.js"></script>
+	<script src="../static/vendors/scripts/process.js"></script>
+	<script src="../static/vendors/scripts/layout-settings.js"></script>
+	<script src="../static/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+	<!-- buttons for Export datatable -->
+	<script src="../static/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/buttons.print.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/buttons.html5.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/buttons.flash.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/pdfmake.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/vfs_fonts.js"></script>
+	<!-- Datatable Setting js -->
+	<script src="../static/vendors/scripts/datatable-setting.js"></script></body>
+{% endblock %}

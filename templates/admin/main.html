@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block title %}아테네 학원입니다.{% endblock %}
+{% block content %}
+
+{% load static %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/modules/data.js"></script>
+
+<div class="card-box mb-30">
+
+   <div class="main-container ml-20">
+      <div class="pd-ltr-20">
+         <div class="card-box pd-20 height-100-p mb-30">
+            <div class="row align-items-center">
+                    <div class="col">
+                       <p class="ml-2"><h4 class="text-success"> 관리자 페이지</h4></p>
+                      <div class="da-card">
+                         <div class="da-card-photo" style="max-height:50%;">
+                              <img src="{% static '/user/weeat_bg.GIF' %}" style="width : 100%; height : 400px;" alt="">
+                        </div>
+                      </div>
+                    </div>
+
+               </div>
+            </div>
+         </div>
+
+         <div class="pd-20 card-box mb-20">
+            <h5 class="h4 text-success mb-20">거래처 리스트</h5>
+
+               <div class="tab-content">
+                  <div class="tab-pane fade show active" id="total" role="tabpanel">
+                     <div class="pd-20">
+                        <div class="row clearfix">
+                            {% if company_list %}
+                            {% for company in company_list %}
+
+                             <div class="col-lg-2 col-md-6 col-sm-12 mb-30">
+                                  <div class="da-card">
+                                     <div class="da-card-photo" style="max-height:50%;">
+                                        <img src="../media/{{ company.cp_img }}" style="width : 100%; height : 200px;" alt="">
+                                 </div>
+                                 <div class="da-card-content">
+                                    <h5 class="h5 mb-10 text-center">{{ company.cp_name }}</h5>
+                                 </div>
+                              </div>
+                             </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+
+
+                        <div class="tab-pane fade" id="math" role="tabpanel">
+                     <div class="pd-20">
+                                <div class="row clearfix">
+                                {% if teacher_math_list %}
+                                {% for teacher in teacher_math_list %}
+                                {% if teacher.t_state %}
+                                     <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+                                          <div class="da-card">
+                                             <div class="da-card-photo" style="max-height:50%;">
+                                                 <img src="../media/{{ teacher.t_file }}" style="width : 100%; height : 400px;" alt="">
+                                             <div class="da-overlay">
+                                                  <div class="da-social">
+                                                     <ul class="clearfix">
+                                                          <script>
+                                                               function openwindow(t_no){
+                                                               var url = "../admin/teacher_detail/" + t_no
+                                                               var win = window.open(url, "PopupWin", "width=700,height=700,left=670,top=150, location=no, resizable=no");}
+                                                          </script>
+                                                     <li><a href="", onclick="openwindow({{ teacher.t_no }});">상세</a></li>
+                                                     </ul>
+                                                  </div>
+                                             </div>
+                                          </div>
+                                              <div class="da-card-content">
+                                                  {% if teacher.user.is_superuser %}
+                                                  <h5 class="h5 mb-10 text-center">원장 {{ teacher.t_name }}</h5>
+                                                  {% else %}
+                                                  <h5 class="h5 mb-10 text-center">{{ teacher.t_name }} 선생님</h5>
+                                                  {% endif %}
+                                              </div>
+                                          </div>
+                                     </div>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane fade" id="eng" role="tabpanel">
+                        <div class="pd-20">
+                            <div class="row clearfix">
+                                {% if teacher_eng_list %}
+                                {% for teacher in teacher_eng_list %}
+                                {% if teacher.t_state %}
+                                     <div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+                                          <div class="da-card">
+                                             <div class="da-card-photo" style="max-height:50%;">
+                                                 <img src="../media/{{ teacher.t_file }}" style="width : 100%; height : 400px;" alt="">
+                                             <div class="da-overlay">
+                                                  <div class="da-social">
+                                                     <ul class="clearfix">
+                                                          <script>
+                                                               function openwindow(t_no){
+                                                               var url = "../admin/teacher_detail/" + t_no
+                                                               var win = window.open(url, "PopupWin", "width=700,height=700,left=670,top=150, location=no, resizable=no");}
+                                                          </script>
+                                                     <li><a href="", onclick="openwindow({{ teacher.t_no }});">상세</a></li>
+                                                     </ul>
+                                                  </div>
+                                             </div>
+                                          </div>
+                                              <div class="da-card-content">
+                                                  {% if teacher.user.is_superuser %}
+                                                  <h5 class="h5 mb-10 text-center">원장 {{ teacher.t_name }}</h5>
+                                                  {% else %}
+                                                  <h5 class="h5 mb-10 text-center">{{ teacher.t_name }} 선생님</h5>
+                                                  {% endif %}
+                                              </div>
+                                          </div>
+                                     </div>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+<div class="container">
+   <!-- js -->
+   <script src="../static/vendors/scripts/core.js"></script>
+   <script src="../static/vendors/scripts/script.min.js"></script>
+   <script src="../static/vendors/scripts/process.js"></script>
+   <script src="../static/vendors/scripts/layout-settings.js"></script>
+   <script src="../static/src/plugins/apexcharts/apexcharts.min.js"></script>
+   <script src="../static/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+   <script src="../static/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+   <script src="../static/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+   <script src="../static/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+   <script src="../static/vendors/scripts/dashboard.js"></script>
+{% endblock %}

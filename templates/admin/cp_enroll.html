@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}위잇딜라이트 - 거래처 등록{% endblock %}
+{% block content %}
+
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="container">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4>거래처 등록</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">거래처 관리</a></li>
+									<li class="breadcrumb-item active text-success" aria-current="page">거래처 등록</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class = "row">
+				<div class="col container">
+					<div class="col card-box mb-30">
+						<div class="container pb-3">
+							<h5 class="my-3 border-bottom pt-3 pb-2">거래처 등록</h5>
+								<div class = "row">
+								<div class = "col">
+								<div class = "row"></div>
+
+								<div class="container">
+
+								<form method="post" enctype="multipart/form-data" class="post-form my-3">
+									{% csrf_token %}
+
+								<p>
+								<!-- 거래처 명 -->
+									<div class="row  mb-30">
+										<label class="col-md-2 mt-2">거래처 명 : </label>
+										<input class="col-md-4 form-control" name="cp_name" type="text" placeholder="거래처 명을 입력 해 주세요">
+									</div>
+
+								<!-- 거래처 전화번호 -->
+									<div class="row  mb-30">
+										<label class="col-md-2 mt-2">전화번호 : </label>
+										<input class="col-md-4 form-control" name="cp_phone" type="text" placeholder="전화번호를 입력 해 주세요">
+									</div>
+								<!-- 거래처 이미지 -->
+									<div class="row  mb-30">
+										<label class="col-md-2 mt-2">이미지 :</label>
+										<input class="col-md-4 form-control" name="cp_img" type="file">
+									</div>
+								</p>
+
+									<div class="row pd-5 pt-2 pull-right">
+
+										<button type="submit" class="btn btn-success" name="버튼" value="2">등록하기</button>
+
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<div class="container">
+	<script src="../static/vendors/scripts/core.js"></script>
+	<script src="../static/vendors/scripts/script.min.js"></script>
+	<script src="../static/vendors/scripts/process.js"></script>
+	<script src="../static/vendors/scripts/layout-settings.js"></script>
+	<script src="../static/src/plugins/apexcharts/apexcharts.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+	<script src="../static/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+	<script src="../static/vendors/scripts/dashboard.js"></script>
+{% endblock %}
