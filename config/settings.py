@@ -36,7 +36,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework',
     # api문서화를 위함
     'drf_yasg',
     'django.contrib.auth',
